@@ -1,0 +1,15 @@
+{
+	"name": "adfcdfs",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "390344f0-f115-4254-a3a5-b6dd83e63937",
+		"tenantId": "8c01a083-9f28-40d2-82f7-9c093a53272a"
+	}
+}
