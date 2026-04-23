@@ -1,0 +1,65 @@
+{
+	"name": "dataflow_Select",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_SurrogateKey_DF_Sou",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_Select_Dest",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "select1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          {month } as string,",
+				"          sales as string,",
+				"          profit as string,",
+				"          location as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> source1",
+				"source1 select(mapColumn(",
+				"          month_old = {month },",
+				"          sales_1 = sales,",
+				"          profit_1 = profit,",
+				"          location_mumbai = location,",
+				"          loky = {month }",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          Row_Number as string,",
+				"          sales as string,",
+				"          profit as string,",
+				"          location as string,",
+				"          Month as string",
+				"     ),",
+				"     partitionFileNames:['Select_DataFlow.csv'],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     header: (['Sum','mix']),",
+				"     partitionBy('hash', 1)) ~> sink1"
+			]
+		}
+	}
+}
