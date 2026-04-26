@@ -1,0 +1,15 @@
+{
+	"name": "asd8277",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Enabled",
+			"editable": true
+		}
+	},
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "3857bc2c-0ba2-4614-85df-467524a41310",
+		"tenantId": "8c01a083-9f28-40d2-82f7-9c093a53272a"
+	}
+}
